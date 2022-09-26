@@ -14,25 +14,25 @@ function Pessoa(nome, sobrenome, peso, altura){
     this.altura = altura
 }
 
-function criarTag(tag){
+Pessoa.prototype.criarTag = function (tag){
     return document.createElement(tag)
 }
 
-function criarTexto(texto){
+Pessoa.prototype.criarTexto = function (texto){
     return document.createTextNode(texto)
 }
 
-function addLi(arr){
+Pessoa.prototype.addLi = function(arr){
     ul.innerText = ''
     arr.forEach(e => {
-        const li = criarTag('li')
-        const texto = criarTexto(`${e.nome} ${e.sobrenome} ${e.peso} ${e.altura}`)
+        const li = this.criarTag('li')
+        const texto = this.criarTexto(`${e.nome} ${e.sobrenome} ${e.peso} ${e.altura}`)
         li.appendChild(texto)
         ul.appendChild(li)
     })
 }
 
-function zeraInput(){
+Pessoa.prototype.zeraInput = function(){
     formulario.reset()
 }
 
@@ -42,13 +42,13 @@ enviar.addEventListener('click', e => {
     e.preventDefault()
     if(!nome.value || !sobrenome.value || !altura.value || !peso.value){
         alert('Preencha todos os campos')
-        zeraInput()
+        Pessoa.zeraInput()
         return
     }
 
     const novaPessoa = new Pessoa(nome.value, sobrenome.value, peso.value, altura.value)
     arrPessoas.push(novaPessoa)
-    addLi(arrPessoas)
-    zeraInput()
+    novaPessoa.addLi(arrPessoas)
+    novaPessoa.zeraInput()
 
 })
